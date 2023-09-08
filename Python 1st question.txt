@@ -1,0 +1,38 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 def create_job_status_dict(job_list, status_list):\
+    """\
+    Create a dictionary where keys are job IDs and values are statuses.\
+    If the status for a job ID is missing, mark it as 'missing'.\
+\
+\
+    Parameters:\
+    - job_list: list of job IDs\
+    - status_list: list of statuses\
+\
+    Returns:\
+    - A dictionary with job IDs as keys and statuses as values\
+    """\
+    job_status_dict = \{\}\
+    \
+    for i, job_id in enumerate(job_list):\
+        # If status exists for the current job ID, use it\
+        if i < len(status_list):\
+            job_status_dict[job_id] = status_list[i]\
+        else:\
+            # Otherwise, mark it as 'missing'\
+            job_status_dict[job_id] = 'missing'\
+    \
+    return job_status_dict\
+\
+# Example usage\
+job = ['id-1', 'id-2', 'id-3', 'id-4', 'id-5']\
+status = [0, 1, 0, 0]\
+result = create_job_status_dict(job, status)\
+print(result)  # Output: \{'id-1': 0, 'id-2': 1, 'id-3': 0, 'id-4': 0, 'id-5': 'missing'\}\
+}
