@@ -1,37 +1,29 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2709
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+from horizon.next.connections import RedshiftConnection
 
-\f0\fs24 \cf0 from horizon.next.connections import RedshiftConnection\
-\
-class BaseConnection:\
-    def __init__(self, credentials):\
-        self.rs_connection = RedshiftConnection(credentials)\
-\
-    def set_timeout(self, timeout=10):\
-        self.rs_connection.timeout = timeout\
-\
-# Your MyDBConnection class inheriting from BaseConnection\
-class MyDBConnection(BaseConnection):\
-    def set_timeout(self, timeout=20):\
-        """\
-        Override the set_timeout method to set a new default value of 20\
-        for the rs_connection.timeout property.\
-\
-        Parameters:\
-        - timeout: New timeout value (Default is 20)\
-\
-        Returns:\
-        - None\
-        """\
-        super().set_timeout(timeout)  # Call the set_timeout method of the BaseConnection class\
-\
-# Test the new class\
-credentials = \{'username': 'user1', 'password': 'pass1'\}\
-my_db_conn = MyDBConnection(credentials)\
-my_db_conn.set_timeout()  # Default timeout should be 20 now\
-print(my_db_conn.rs_connection.timeout)  # Output should be 20\
-}
+class BaseConnection:
+    def __init__(self, credentials):
+        self.rs_connection = RedshiftConnection(credentials)
+
+    def set_timeout(self, timeout=10):
+        self.rs_connection.timeout = timeout
+
+# MyDBConnection class inherits from BaseConnection
+class MyDBConnection(BaseConnection):
+    def set_timeout(self, timeout=20):
+        """
+        Override the set_timeout method to set a new default value of 20
+        for the rs_connection.timeout property.
+
+        Parameters:
+        - timeout: New timeout value (Default is 20)
+
+        Returns:
+        - None
+        """
+        super().set_timeout(timeout)  # Call the set_timeout method of the BaseConnection class
+
+# Test the new class
+credentials = {'username': 'user1', 'password': 'pass1'}
+my_db_conn = MyDBConnection(credentials)
+my_db_conn.set_timeout()  # Default timeout should be 20 now
+print(my_db_conn.rs_connection.timeout)  # Output should be 20
