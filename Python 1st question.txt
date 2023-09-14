@@ -12,14 +12,18 @@ def create_job_status_dict(job_list, status_list):
     """
     job_status_dict = {}
 
-    for i, job_id in enumerate(job_list):
-        # If status exists for the current job ID, use it
-        if i < len(status_list):
-            job_status_dict[job_id] = status_list[i]
-        else:
-            # Otherwise, mark it as 'missing'
-            job_status_dict[job_id] = 'missing'
-
+    try:
+        for i, job_id in enumerate(job_list):
+            # If status exists for the current job ID, use it
+            if i < len(status_list):
+                job_status_dict[job_id] = status_list[i]
+            else:
+                # Otherwise, mark it as 'missing'
+                job_status_dict[job_id] = 'missing'
+    except Exception as e:
+        # Handle the exception, e.g., print an error message
+        print(f"An error occurred: {e}")
+    
     return job_status_dict
 
 # Example usage
